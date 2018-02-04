@@ -1,0 +1,18 @@
+language: go
+go:
+- 1.9
+script: go vet
+before_deploy:
+- "./build.sh"
+deploy:
+  provider: releases
+  api_key:
+    secure: kBVpKtEmH2EtE37KtrUZ4NDmZQCqDgNiBsD4vEyY5kyY65TQUhCpE2kKyeKTzGTrZNVqGT2V2dR1r6tZ2DT4KL9ZuvaMt3Lsm/YDeuhczVUj3GNgqEKNdr7HAyjwhPVH9NQkD3W3lE3QnSbsan0q/FSi7tTez3s+KwY1LpQtKEU+XSSewFVv2IKZcWBKRtbtsOnhpd1aestB3bhwYUBQTm7lX/yWM6gkLgG1a1MZkCbdnh/0aTveFep1qlN2Ck2oqSNoLwryNJQu0J97lu2cX44hKMEhP6M95SVkVIH7yzz8PpIpnVvKUqaV4J3l4LK5JhU68gR+V+F5+y80uRTU1NIxFWs5kFdCnygL2UUNvQ3NlyudnMeQsHMIQ5hk3F4bZf5XHMu7IxuI80uIqn6PCTJM3q9kSBLK7lKSQS5HuQpAQcB10vNXF7ghzHohJChMmRoEJuIxJr5Pa7e5DwdvkrEVYT9mKDnPsqH0cY1gIS1T8lMB84xoDK/ivAhcBYOrFA3ldugMItXEcIEGJha+vk/1d1sG3HwiHjuo/FPUV10BmUwD5JrNsPIJm3aCxeU4ZJpXno2b8fkctz5mVAPw4b2VCFLRUZe5xCE41gDRjbPXqPVwVRhoqUgqyw5DhoZ2k2pbuio48fKG2Fvf0FyLpyrESLhao/EOpqpXWZgPE6A=
+  skip_cleanup: true
+  file:
+    - release/bamboo_exporter-linux-amd64
+    - release/bamboo_exporter-linux-amd64.sha256
+  on:
+    repo: wakeful/bamboo_exporter
+    branch: master
+    tags: true
