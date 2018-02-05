@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"errors"
 	"flag"
@@ -246,9 +247,15 @@ var supportedSchema = map[string]bool{
 }
 
 func NewExporter(uri, user, password string) *Exporter {
+
+	tr := &http.Transport{
+		TLSClientConfig: &tls.Config{InsecureSkipVerify: true},
+	}
+
 	return &Exporter{uri,
 		&http.Client{
-			Timeout: 3 * time.Second,
+			Timeout:   3 * time.Second,
+			Transport: tr,
 		},
 		struct {
 			UserName string
